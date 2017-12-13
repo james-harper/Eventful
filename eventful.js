@@ -40,33 +40,6 @@ var Eventful = /** @class */ (function () {
     };
     ;
     /**
-     * Check if listeners exist for the given event name.
-     * If they do not, then initialise with an empty array
-     * @private
-     * @param {string} name The name of the event
-     * @param {boolean} checkOnceListeners Should single-use listeners also be
-     *                                     checked?
-     */
-    Eventful.prototype._checkIfListenersExist = function (name, checkOnceListeners) {
-        if (checkOnceListeners === void 0) { checkOnceListeners = false; }
-        if (!this._listeners) {
-            this._listeners = {};
-        }
-        if (!this._listeners[name]) {
-            this._listeners[name] = [];
-        }
-        if (!checkOnceListeners) {
-            return;
-        }
-        if (!this._onceListeners) {
-            this._onceListeners = {};
-        }
-        if (!this._onceListeners[name]) {
-            this._onceListeners[name] = [];
-        }
-    };
-    ;
-    /**
      * Register an event listener
      *
      * @param {string} name - The name of the event to be subscribed to.
@@ -74,7 +47,9 @@ var Eventful = /** @class */ (function () {
      *                         This will have access to the Event object as its first argument.
      */
     Eventful.prototype.on = function (name, fnc) {
-        this._checkIfListenersExist(name);
+        if (!this._listeners[name]) {
+            this._listeners[name] = [];
+        }
         this._listeners[name].push(fnc.bind(this));
         var index = this._listeners[name].length - 1;
         this._eventTarget.addEventListener(name, this._listeners[name][index]);
@@ -88,9 +63,14 @@ var Eventful = /** @class */ (function () {
      *                         This will have access to the Event object as its first argument.
      */
     Eventful.prototype.once = function (name, fnc) {
-        this._checkIfListenersExist(name, true);
+        if (!this._listeners[name]) {
+            this._listeners[name] = [];
+        }
         this._listeners[name].push(fnc.bind(this));
         var index = this._listeners[name].length - 1;
+        if (!this._onceListeners[name]) {
+            this._onceListeners[name] = [];
+        }
         this._onceListeners[name].push(index);
         this._eventTarget.addEventListener(name, this._listeners[name][index], { once: true });
     };
@@ -184,3 +164,13 @@ function EventfulPrototype() {
     return Object.create(Eventful.prototype);
 }
 ;
+/**
+ * Helper function for turning an object into an Eventful object
+ * @param {object} obj
+ * @returns {object}
+ */
+function Eventify(obj) {
+    Object.setPrototypeOf(obj, Eventful.prototype);
+    Eventful.apply(obj);
+    return obj;
+}
