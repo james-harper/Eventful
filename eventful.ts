@@ -188,10 +188,3 @@ function Eventify(obj:object) : object {
   Eventful.apply(obj);
   return obj;
 }
-
-
-
-
-
-
-
