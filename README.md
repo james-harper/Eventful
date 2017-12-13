@@ -8,10 +8,10 @@ Simply include `eventful.js` and refer to the examples below to see how an
 object can be made `Eventful`.
 
 The main methods of interest are:
-`on(eventName, eventData)` - Registers an event listener.
-`once(eventName, eventData)` - Registers a single-use event listener.
-`off(eventName)` - Removes listeners for the given event.
-`fireEvent(eventName, eventData)` - Fire the event.
+- `on(eventName, eventData)` - Registers an event listener.
+- `once(eventName, eventData)` - Registers a single-use event listener.
+- `off(eventName)` - Removes listeners for the given event.
+- `fireEvent(eventName, eventData)` - Fire the event.
 
 ## Examples
 
