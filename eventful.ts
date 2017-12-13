@@ -184,7 +184,7 @@ function EventfulPrototype() : Eventful {
  * @returns {object}
  */
 function Eventify(obj:object) : object {
-  Object.setPrototypeOf(obj, Eventful.prototype);
+  (<any>Object).setPrototypeOf(obj, Eventful.prototype);
   Eventful.apply(obj);
   return obj;
 }
