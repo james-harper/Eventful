@@ -104,6 +104,8 @@ dog.fireEvent('see-cat');
 
 ## Contributing
 If any bugs or potential improvements are spotted, changes are welcome.
-If you are making a contribution, please edit the Typescript file
-`eventful.ts` (with valid types and documentation) and include a compiled
-`eventful.js`. Thanks
+If you are making a contribution, please edit the Typescript files in the `src`
+directory. And include a compiled `eventful.js` by using the following command:
+```bash
+tsc src/* --out eventful.js
+ ```
