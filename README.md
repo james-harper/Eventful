@@ -101,3 +101,9 @@ dog.on('see-cat', dog.bark.bind(dog));
 dog.fireEvent('see-cat');
 // woof
 ```
+
+## Contributing
+If any bugs or potential improvements are spotted, changes are welcome.
+If you are making a contribution, please edit the Typescript file
+`eventful.ts` (with valid types and documentation) and include a compiled
+`eventful.js`. Thanks
