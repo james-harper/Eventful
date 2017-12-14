@@ -69,7 +69,7 @@ class Eventful {
     }
 
     this._listeners[name].push(fnc.bind(this));
-    var index = this._listeners[name].length - 1;
+    let index = this._listeners[name].length - 1;
 
     if (!this._onceListeners[name]) {
       this._onceListeners[name] = [];
